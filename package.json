@@ -1,0 +1,32 @@
+{
+  "name": "gamejournal",
+  "version": "1.0.0",
+  "description": "Keep track of your progress in all the games you're currently playing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Breezy Fasano",
+  "license": "ISC",
+  "scripts": {
+    "dev-server": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-modal": "^3.11.1",
+    "validator": "^11.1.0"
+  }
+}
