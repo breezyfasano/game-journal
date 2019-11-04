@@ -5,6 +5,7 @@ import AddGame from './subcomponents/AddGame'
 const GamesPlaying = (props) => (
     <div>
         <AddGame />
+        <ul>
         {
             props.games.map((game) => (
                 <Game
@@ -13,6 +14,7 @@ const GamesPlaying = (props) => (
                 />
             ))
         }
+        </ul>
     </div>
 )
 
