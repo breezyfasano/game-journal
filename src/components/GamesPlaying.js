@@ -6,14 +6,14 @@ const GamesPlaying = (props) => (
     <div>
         <AddGame />
         <ul>
-        {
-            props.games.map((game) => (
+        
                 <Game
-                    key={game}
-                    title={game}
+                    key={props.games.name}
+                    url={'props.games.image.small_url'}
+                    title={'props.games.name'}
+                    desc={'props.games.deck'}
                 />
-            ))
-        }
+        
         </ul>
     </div>
 )

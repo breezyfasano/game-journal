@@ -1,6 +1,6 @@
 # Game Journal
 
-The purpose of this app is to catalog journal entries respective to each game currently being played.
+The purpose of this app is to catalog journal entries respective to each game currently being played. Applying what I've learned from Andrew Mead's React course as I go through it!
 
 ## Project Notes
 - Need React Router

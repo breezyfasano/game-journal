@@ -1,0 +1,17 @@
+.game {
+    max-width: 250px;
+    box-shadow: 2px 1px 10px rgba(0,0,0,.3);
+    border-radius: 5px;
+}
+
+.game__thumbnail  {
+    max-width: 100%;
+}
+
+.game__info  {
+    padding:10px;
+}
+
+.game__description {
+    font-size: 1.2rem;
+}
