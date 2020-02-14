@@ -30,7 +30,7 @@ class GameJournal extends React.Component {
         return (
             <div>
                 <Header title={'Game Journal'} />
-                <GamesPlaying games={this.state.games[0]} />
+                {this.state.games && <GamesPlaying games={this.state.games} />}
                 <Footer currentYear={currentYear} />
             </div>
         )

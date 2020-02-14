@@ -5,17 +5,15 @@ import AddGame from './subcomponents/AddGame'
 const GamesPlaying = (props) => (
     <div>
         <AddGame />
-        <ul>
-        
-                <Game
+        {
+                props.games.name && (<Game
                     key={props.games.name}
-                    url={'props.games.image.small_url'}
-                    title={'props.games.name'}
-                    desc={'props.games.deck'}
-                />
-        
-        </ul>
+                    url={'game.image.small_url'}
+                    title={props.games.name}
+                    desc={'game.deck'}
+                />)
+        }
     </div>
-)
+);
 
 export default GamesPlaying;
