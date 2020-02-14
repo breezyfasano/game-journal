@@ -8,33 +8,48 @@ import './styles/styles.scss';
 import fetchJsonp from 'fetch-jsonp';
 let searchQuery = 'persona';
 
+// Nothing is going to work until you finish this https://reactjs.org/docs/faq-ajax.html
+
 class GameJournal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: []
+            games: [],
+            isLoaded: false,
+            error: null
         }
     }
     componentDidMount() {
         fetchJsonp('https://www.giantbomb.com/api/search/?api_key=7b08a75a0e48b4512e7ec46806fe64e734008c91&format=jsonp&field_list=name,deck,image&query=' + searchQuery,
-            {jsonpCallback: 'json_callback'})
+            { jsonpCallback: 'json_callback' })
             .then(res => res.json())
             .then((data) => {
-                this.setState({ games: data.results })
+                this.setState({
+                    games: data.results,
+                    isLoaded: true,
+                    error
+                });
             })
             .catch(console.log)
     }
     render() {
         const date = new Date();
         const currentYear = date.getFullYear();
-        return (
-            <div>
-                <Header title={'Game Journal'} />
-                {this.state.games && <GamesPlaying games={this.state.games} />}
-                <Footer currentYear={currentYear} />
-            </div>
-        )
+        const { error, isLoaded, items } = this.state;
+        if (error) {
+            return <div>Error: {error.message}</div>;
+        } else if (!isLoaded) {
+            return <div>Loading...</div>;
+        } else {
+            return (
+                <div>
+                    <Header title={'Game Journal'} />
+                    {this.state.games && <GamesPlaying games={this.state.games} />}
+                    <Footer currentYear={currentYear} />
+                </div>
+            )
+        }
     }
 }
 
-ReactDOM.render(<GameJournal />, document.getElementById('app'));
+    ReactDOM.render(<GameJournal />, document.getElementById('app'));
