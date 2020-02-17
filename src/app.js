@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import GamesPlaying from './components/GamesPlaying';
+import SearchResults from './components/SearchResults';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import fetchJsonp from 'fetch-jsonp';
-let searchQuery = 'persona';
+import AddGame from './components/subcomponents/AddGame';
 
 // Nothing is going to work until you finish this https://reactjs.org/docs/faq-ajax.html
 
@@ -16,26 +16,43 @@ class GameJournal extends React.Component {
         this.state = {
             games: [],
             isLoaded: false,
-            error: null
+            error: null,
+            searchQuery: ''
         }
+        this.handleAddGame= this.handleAddGame.bind(this);
     }
     componentDidMount() {
-        fetchJsonp('https://www.giantbomb.com/api/search/?api_key=7b08a75a0e48b4512e7ec46806fe64e734008c91&format=jsonp&field_list=name,deck,image&query=' + searchQuery,
+        let searchQuery = this.state.searchQuery;
+        fetchJsonp('https://www.giantbomb.com/api/search/?api_key=7b08a75a0e48b4512e7ec46806fe64e734008c91&format=jsonp&field_list=name,deck,image&resources=game&query=' + searchQuery,
             { jsonpCallback: 'json_callback' })
             .then(res => res.json())
             .then((data) => {
                 this.setState({
                     games: data.results,
-                    isLoaded: true,
-                    error
+                    isLoaded: true
                 });
-            })
-            .catch(console.log)
+            },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
     }
+    handleAddGame() {
+        this.setState(() => ({
+            searchQuery: 'Stardew'
+        }));
+    }
+
     render() {
         const date = new Date();
         const currentYear = date.getFullYear();
-        const { error, isLoaded, items } = this.state;
+        const { error, isLoaded, games } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -44,7 +61,9 @@ class GameJournal extends React.Component {
             return (
                 <div>
                     <Header title={'Game Journal'} />
-                    {this.state.games && <GamesPlaying games={this.state.games} />}
+                    <AddGame />
+                    <button onPress={this.handleAddGame}>button</button>
+                    {this.state.games && <SearchResults games={this.state.games} />}
                     <Footer currentYear={currentYear} />
                 </div>
             )
@@ -52,4 +71,4 @@ class GameJournal extends React.Component {
     }
 }
 
-    ReactDOM.render(<GameJournal />, document.getElementById('app'));
+ReactDOM.render(<GameJournal />, document.getElementById('app'));

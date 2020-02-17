@@ -11,4 +11,19 @@ body {
     color: #1a1a1a;
     font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     font-size: 1.6rem;
+    padding: 2em;
+}
+
+.SearchResults-container {
+    margin: 0 auto;
+    max-width: 80vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    .game {
+        height: auto;
+        margin-right: 20px;
+        margin-top: 10px;
+    }
 }
