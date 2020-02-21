@@ -8,7 +8,6 @@ import './styles/styles.scss';
 import fetchJsonp from 'fetch-jsonp';
 import AddGame from './components/subcomponents/AddGame';
 
-// Nothing is going to work until you finish this https://reactjs.org/docs/faq-ajax.html
 
 class GameJournal extends React.Component {
     constructor(props) {
@@ -22,7 +21,7 @@ class GameJournal extends React.Component {
         this.handleAddGame= this.handleAddGame.bind(this);
     }
     componentDidMount() {
-        let searchQuery = this.state.searchQuery;
+        let searchQuery = 'Stardew';
         fetchJsonp('https://www.giantbomb.com/api/search/?api_key=7b08a75a0e48b4512e7ec46806fe64e734008c91&format=jsonp&field_list=name,deck,image&resources=game&query=' + searchQuery,
             { jsonpCallback: 'json_callback' })
             .then(res => res.json())
@@ -32,9 +31,6 @@ class GameJournal extends React.Component {
                     isLoaded: true
                 });
             },
-                // Note: it's important to handle errors here
-                // instead of a catch() block so that we don't swallow
-                // exceptions from actual bugs in components.
                 (error) => {
                     this.setState({
                         isLoaded: true,
